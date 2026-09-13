@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>자금조달 사례 — 정병현 · 임두만</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --paper:#F3F2EE; --paper-2:#E7E5DE;
+    --ink:#16211D; --ink-2:#1E2C27; --ink-soft:#5A645F; --ink-faint:#8B938E;
+    --rule:#CBC8BF; --rule-d:rgba(243,242,238,.16);
+    --seal:#B0232A; --seal-soft:#D8666B;
+    --font:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;
+  }
+  html,body{height:100%}
+  body{
+    font-family:var(--font); background:#0A110E; color:var(--paper);
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
+    word-break:keep-all; -webkit-font-smoothing:antialiased;
+  }
+  #viewport{position:relative;width:100%;height:100%;overflow:hidden}
+  #stage{
+    position:absolute; top:50%; left:50%;
+    width:1280px; height:720px; transform-origin:center center;
+  }
+  .slide{
+    position:absolute; inset:0; background:var(--ink);
+    padding:56px 72px; display:none; flex-direction:column;
+  }
+  .slide.on{display:flex}
+  .slide::before{
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:repeating-linear-gradient(to bottom,rgba(243,242,238,.04) 0 1px,transparent 1px 46px);
+  }
+  .slide > *{position:relative}
+
+  .fig{font-variant-numeric:tabular-nums;letter-spacing:-.04em;font-weight:800}
+
+  /* ── 표지 ── */
+  .cover{justify-content:center}
+  .cover__kicker{font-size:15px;font-weight:700;color:var(--seal-soft);margin-bottom:24px}
+  .cover__title{font-size:66px;font-weight:800;line-height:1.18;letter-spacing:-.045em}
+  .channel{display:flex;align-items:center;height:3px;width:420px;margin:36px 0 32px}
+  .channel i{flex:0 0 26%;height:3px;background:repeating-linear-gradient(to right,var(--ink-faint) 0 6px,transparent 6px 14px)}
+  .channel b{width:9px;height:9px;border-radius:50%;background:var(--seal);margin:0 6px}
+  .channel s{flex:1;height:3px;background:linear-gradient(to right,var(--seal),rgba(176,35,42,.12))}
+  .cover__lede{font-size:19px;line-height:1.8;color:rgba(243,242,238,.66);max-width:46ch}
+  .cover__meta{
+    margin-top:46px;padding-top:22px;border-top:1px solid var(--rule-d);
+    display:flex;gap:44px;align-items:baseline
+  }
+  .cover__meta b{font-size:18px;font-weight:800;letter-spacing:-.03em}
+  .cover__meta span{font-size:13px;color:rgba(243,242,238,.5);margin-left:10px}
+
+  /* ── 사례 ── */
+  .bar{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .bar .no{font-size:13px;font-weight:800;letter-spacing:.02em;color:var(--seal-soft)}
+  .bar .sector{font-size:13px;font-weight:700;border:1px solid var(--rule-d);padding:3px 10px}
+  .bar .subject{font-size:13px;color:rgba(243,242,238,.5)}
+
+  .title{font-size:38px;font-weight:800;letter-spacing:-.04em;line-height:1.3;max-width:30ch}
+
+  .body{display:grid;grid-template-columns:1fr 48px 1.08fr;margin-top:32px;align-items:stretch}
+  .lab{font-size:12px;font-weight:700;color:rgba(243,242,238,.45);margin-bottom:14px}
+  .lab.seal{color:var(--seal-soft)}
+
+  .before ul{list-style:none}
+  .before li{font-size:17px;line-height:1.7;color:rgba(243,242,238,.66);padding-left:16px;position:relative;margin-bottom:14px}
+  .before li::before{content:'';position:absolute;left:0;top:.68em;width:7px;height:2px;background:var(--ink-faint)}
+  .blocked{
+    margin-top:20px;padding-top:14px;border-top:1px dashed rgba(243,242,238,.18);
+    font-size:14px;line-height:1.65;color:var(--ink-faint);font-style:italic
+  }
+
+  .pipe{display:flex;align-items:center;justify-content:center;position:relative}
+  .pipe i{width:2px;height:100%;background:linear-gradient(to bottom,rgba(243,242,238,.12),var(--seal))}
+  .pipe b{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--seal);top:50%;transform:translateY(-50%)}
+
+  .figs{display:flex;gap:38px;margin-bottom:18px}
+  .figs .v{font-size:52px;line-height:1.05;display:block}
+  .figs .l{font-size:13px;color:var(--seal-soft);margin-top:4px;display:block}
+  .result{font-size:18px;font-weight:700;letter-spacing:-.025em;line-height:1.6}
+  .effect{font-size:15px;line-height:1.7;color:rgba(243,242,238,.55);margin-top:8px}
+
+  .approach{margin-top:auto;padding-top:22px;border-top:1px solid var(--rule-d)}
+  .approach ol{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .approach li{font-size:14px;line-height:1.7;color:rgba(243,242,238,.68)}
+  .approach li em{display:block;font-style:normal;font-size:12px;font-weight:800;color:var(--seal-soft);margin-bottom:5px}
+
+  /* ── 클로징 ── */
+  .close{justify-content:center}
+  .close__title{font-size:50px;font-weight:800;line-height:1.22;letter-spacing:-.045em}
+  .close__lede{font-size:18px;line-height:1.8;color:rgba(243,242,238,.66);max-width:50ch;margin-top:26px}
+  .close__grid{margin-top:40px;padding-top:24px;border-top:1px solid var(--rule-d);display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .close__grid b{display:block;font-size:15px;font-weight:800;letter-spacing:-.03em;margin-bottom:5px}
+  .close__grid span{font-size:12.5px;line-height:1.6;color:rgba(243,242,238,.5)}
+  .close__cta{margin-top:36px;font-size:15px;font-weight:700;color:var(--seal-soft)}
+
+  .foot{
+    position:absolute;left:72px;right:72px;bottom:26px;
+    display:flex;align-items:center;justify-content:space-between;
+    font-size:11.5px;color:rgba(243,242,238,.32)
+  }
+  .note{max-width:72ch;line-height:1.6}
+
+  /* ── 조작 ── */
+  #dots{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:5}
+  #dots button{
+    width:9px;height:9px;border-radius:50%;border:0;padding:0;cursor:pointer;
+    background:rgba(243,242,238,.25);transition:background .2s,transform .2s
+  }
+  #dots button.on{background:var(--seal);transform:scale(1.25)}
+  #hint{
+    position:fixed;top:16px;right:20px;z-index:5;font-size:11.5px;
+    color:rgba(243,242,238,.38);transition:opacity .6s
+  }
+  .nav{
+    position:fixed;top:0;bottom:0;width:14%;z-index:4;border:0;background:transparent;cursor:pointer;opacity:0
+  }
+  .nav.prev{left:0} .nav.next{right:0}
+  .nav:hover{opacity:1;background:linear-gradient(to right,rgba(243,242,238,.05),transparent)}
+  .nav.next:hover{background:linear-gradient(to left,rgba(243,242,238,.05),transparent)}
+
+  @media print{
+    @page{size:1280px 720px;margin:0}
+    body{display:block;background:#fff}
+    #viewport{position:static;width:auto;height:auto;overflow:visible}
+    #stage{position:static;width:1280px;height:auto;transform:none}
+    .slide{position:static;display:flex !important;width:1280px;height:720px;break-after:page;page-break-after:always}
+    #dots,#hint,.nav{display:none}
+  }
+</style>
+</head>
+<body>
+<div id="viewport">
+  <div id="stage"></div>
+</div>
+<button class="nav prev" aria-label="이전 슬라이드"></button>
+<button class="nav next" aria-label="다음 슬라이드"></button>
+<div id="dots"></div>
+<p id="hint">← → 방향키 · 화면 좌우 클릭 · P 인쇄</p>
+
+<script>
+/* ── 사례 데이터 : 사이트 src/data/cases.js 와 동일 ───────────────── */
+const cases = [
+  {
+    no:'01', sector:'개인사업자 · 임대사업', subject:'원룸건물 소유주',
+    title:'담보가치는 내려가는데 상환 압박은 올라오던 상태',
+    before:[
+      '마이너스통장 · 정책자금 · 담보대출이 섞인 금융부채 3억 원',
+      '건물 감정가 하락으로 한도 감액과 일부 상환 요구가 들어옴',
+      '운영에 쓸 추가 자금까지 같은 시기에 필요한 상황'
+    ],
+    blocked:'금리는 높고 한도는 줄어드는데, 새 자금은 어느 창구에서도 나오지 않았습니다.',
+    approach:[
+      '흩어진 3건의 부채를 한 장으로 모아 실효금리와 상환 일정을 먼저 계산',
+      '임대 현금흐름을 심사가 읽는 형식으로 재작성해 상환 능력을 증빙',
+      '담보 트랙과 신용 · 정책 트랙을 나눠 기관별로 가져갈 몫을 다시 배분'
+    ],
+    figures:[{value:'3억 원',label:'기존 대출 전액 최저금리 대환'},{value:'+1억 원',label:'추가 운영자금 신규 조달'}],
+    result:'기존 3억 원을 전액 최저금리로 대환하고, 1억 원을 추가로 조달했습니다.',
+    effect:'월 이자 부담을 낮추면서 운영자금까지 같은 시점에 확보했습니다.'
+  },
+  {
+    no:'02', sector:'제조업 · 법인', subject:'담보 여력을 모두 쓴 생산기업',
+    title:'담보가 바닥나자 모든 창구가 함께 닫힌 상태',
+    before:[
+      '보유 부동산과 설비의 담보 여력을 이미 소진',
+      '추가 담보대출 불가 통보, 신규 여신도 연이어 거절',
+      '수주는 남아 있는데 원자재 대금을 막을 현금이 없던 상황'
+    ],
+    blocked:'담보를 기준으로 보는 창구에서는 더 볼 것이 남아 있지 않았습니다.',
+    approach:[
+      '심사 기준을 담보에서 기술과 신용으로 옮기는 쪽으로 방향 전환',
+      '보유 기술과 생산 실적을 기술평가가 인정하는 문서 형태로 정리',
+      '수주잔고와 거래 이력으로 운전자금 소요액의 근거를 새로 작성'
+    ],
+    figures:[{value:'3억 원',label:'무담보 신용 조달'},{value:'최저금리',label:'적용 조건'}],
+    result:'담보 없이 신용으로 3억 원을 최저금리 조건으로 조달했습니다.',
+    effect:'남은 담보 여력을 시설 투자용으로 아껴 둘 수 있게 됐습니다.'
+  },
+  {
+    no:'03', sector:'도 · 소매 유통 · 법인', subject:'고금리 차입이 쌓인 유통기업',
+    title:'급한 불을 끄려고 쓴 돈이 다음 불씨가 된 상태',
+    before:[
+      '2금융권 대출과 카드론 등 고금리 차입 2억 5천만 원 누적',
+      '이자 부담이 커지며 매입 대금 결제가 밀리기 시작',
+      '정책자금을 신청했다가 부결된 이력이 남아 있던 상황'
+    ],
+    blocked:'부채비율과 부결 이력이 함께 걸려, 어느 기관에서도 다음 단계로 넘어가지 않았습니다.',
+    approach:[
+      '부결 사유를 역으로 분석해 이번에는 걸리지 않을 기관과 시점을 선별',
+      '고금리 차입을 먼저 정리해 부채 구조를 심사가 받아들일 형태로 재편',
+      '재고 회전과 매입채무 주기를 근거로 운전자금 소요액을 다시 산정'
+    ],
+    figures:[{value:'2.5억 원',label:'고금리 차입 저금리 대환'},{value:'+1.5억 원',label:'운전자금 추가 조달'}],
+    result:'고금리 차입 2억 5천만 원을 저금리로 대환하고 운전자금 1억 5천만 원을 더했습니다.',
+    effect:'월 이자 부담이 줄면서 매입 결제 주기가 정상으로 돌아왔습니다.'
+  },
+  {
+    no:'04', sector:'기술기업 · 창업 4년차', subject:'매출보다 기술이 앞선 초기기업',
+    title:'재무제표만 보는 창구에서는 계속 같은 답이 돌아오던 상태',
+    before:[
+      '매출과 자산이 적어 재무 기준 심사에서 연속 거절',
+      '대표 개인 담보도 없어 담보 트랙 자체가 불가능',
+      '개발 인력 인건비가 매달 고정으로 빠져나가던 상황'
+    ],
+    blocked:'숫자가 쌓이기 전까지는 기다리라는 답만 돌아왔습니다.',
+    approach:[
+      '재무 트랙을 접고 기술평가 트랙으로 심사 창구 자체를 변경',
+      '보유 기술을 특허와 개발 문서로 자산화해 기술평가 등급의 근거를 확보',
+      '융자와 상환의무 없는 지원 과제를 시차를 두고 이중으로 배치'
+    ],
+    figures:[{value:'2억 원',label:'기술평가 기반 신용 조달'},{value:'별도 과제',label:'무상 지원 병행'}],
+    result:'보증서 기반 신용으로 2억 원을 조달하고, 상환의무 없는 지원 과제를 함께 붙였습니다.',
+    effect:'개발 인력을 줄이지 않고 다음 제품 단계까지 갈 수 있게 됐습니다.'
+  }
+];
+
+const NOTE = '실제 진행 건을 기업 식별 정보 없이 정리한 내용입니다. 금리 · 한도 · 승인 여부는 기업의 재무 상태, 신용, 담보, 신청 시점과 기관 정책에 따라 달라지며 동일한 결과를 보장하지 않습니다.';
+
+/* ── 슬라이드 생성 ────────────────────────────────────────────── */
+const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+const cover = `
+<section class="slide cover">
+  <p class="cover__kicker">금융자금 · 정책자금 조달 컨설팅</p>
+  <h1 class="cover__title">“안 된다”고 했던 그 자금,<br>숨통을 틔운 네 건의 기록</h1>
+  <div class="channel"><i></i><b></b><s></s></div>
+  <p class="cover__lede">네 건 모두 다른 곳에서 어렵다는 답을 받은 뒤에 시작된 건입니다.
+  어떤 상태였고, 어디가 막혀 있었고, 무엇을 바꿨는지 순서대로 정리했습니다.</p>
+  <div class="cover__meta">
+    <div><b>정병현</b><span>자금 구조 설계 · 정책자금</span></div>
+    <div><b>임두만</b><span>금융자금 · 대환 설계</span></div>
+  </div>
+  <div class="foot"><span>자금조달 컨설팅</span><span>CASE 01 — 04</span></div>
+</section>`;
+
+const caseSlide = c => `
+<section class="slide">
+  <div class="bar">
+    <span class="no fig">CASE ${esc(c.no)}</span>
+    <span class="sector">${esc(c.sector)}</span>
+    <span class="subject">${esc(c.subject)}</span>
+  </div>
+  <h2 class="title">${esc(c.title)}</h2>
+  <div class="body">
+    <div class="before">
+      <p class="lab">조달 전</p>
+      <ul>${c.before.map(b=>`<li>${esc(b)}</li>`).join('')}</ul>
+      <p class="blocked">${esc(c.blocked)}</p>
+    </div>
+    <div class="pipe"><i></i><b></b></div>
+    <div class="after">
+      <p class="lab seal">조달 결과</p>
+      <div class="figs">
+        ${c.figures.map(f=>`<div><span class="v fig">${esc(f.value)}</span><span class="l">${esc(f.label)}</span></div>`).join('')}
+      </div>
+      <p class="result">${esc(c.result)}</p>
+      <p class="effect">${esc(c.effect)}</p>
+    </div>
+  </div>
+  <div class="approach">
+    <p class="lab">무엇을 바꿨나</p>
+    <ol>${c.approach.map((a,i)=>`<li><em>${i+1}</em>${esc(a)}</li>`).join('')}</ol>
+  </div>
+</section>`;
+
+const closing = `
+<section class="slide close">
+  <h2 class="close__title">지금 우리 회사는<br>어디까지 열려 있습니까.</h2>
+  <p class="close__lede">진단에는 비용을 받지 않습니다. 신청 가능한 기관과 트랙, 한도를 막고 있는 것이
+  무엇인지 먼저 확인해 보시고 결정하셔도 늦지 않습니다. 어렵다는 판단이 나오면 그 이유도 그대로 말씀드립니다.</p>
+  <div class="close__grid">
+    <div><b>사업자등록증</b><span>업종과 개업일 확인</span></div>
+    <div><b>최근 재무제표</b><span>개인사업자는 소득금액증명</span></div>
+    <div><b>기존 대출 현황</b><span>기관 · 잔액 · 금리</span></div>
+    <div><b>등기부등본</b><span>부동산 보유 시</span></div>
+  </div>
+  <p class="close__cta">briany0527@naver.com · drbriany.com</p>
+  <div class="foot"><span class="note">${esc(NOTE)}</span></div>
+</section>`;
+
+const html = cover + cases.map(caseSlide).join('') + closing;
+const stage = document.getElementById('stage');
+stage.innerHTML = html;
+
+/* ── 크기 맞춤 ────────────────────────────────────────────────── */
+function fit(){
+  const s = Math.min(window.innerWidth/1280, window.innerHeight/720);
+  stage.style.transform = `translate(-50%,-50%) scale(${s})`;
+}
+window.addEventListener('resize', fit); fit();
+
+/* ── 이동 ─────────────────────────────────────────────────────── */
+const slides = [...stage.querySelectorAll('.slide')];
+const dots = document.getElementById('dots');
+slides.forEach((_,i)=>{
+  const b = document.createElement('button');
+  b.setAttribute('aria-label', `${i+1}번 슬라이드`);
+  b.onclick = () => go(i);
+  dots.appendChild(b);
+});
+let idx = 0;
+function go(n){
+  idx = Math.max(0, Math.min(slides.length-1, n));
+  slides.forEach((s,i)=>s.classList.toggle('on', i===idx));
+  [...dots.children].forEach((d,i)=>d.classList.toggle('on', i===idx));
+  location.hash = idx ? '#' + (idx+1) : '';
+}
+document.querySelector('.nav.prev').onclick = () => go(idx-1);
+document.querySelector('.nav.next').onclick = () => go(idx+1);
+document.addEventListener('keydown', e=>{
+  if(['ArrowRight','PageDown',' '].includes(e.key)){ e.preventDefault(); go(idx+1); }
+  else if(['ArrowLeft','PageUp'].includes(e.key)){ e.preventDefault(); go(idx-1); }
+  else if(e.key==='Home') go(0);
+  else if(e.key==='End') go(slides.length-1);
+  else if(e.key==='p'||e.key==='P') window.print();
+  else if(/^[1-9]$/.test(e.key)) go(+e.key-1);
+});
+let tx=null;
+addEventListener('touchstart', e=>{ tx = e.changedTouches[0].clientX; }, {passive:true});
+addEventListener('touchend', e=>{
+  if(tx===null) return;
+  const d = e.changedTouches[0].clientX - tx;
+  if(Math.abs(d) > 50) go(idx + (d<0 ? 1 : -1));
+  tx=null;
+}, {passive:true});
+
+go(Math.max(0, (parseInt(location.hash.slice(1),10)||1) - 1));
+setTimeout(()=>{ document.getElementById('hint').style.opacity = 0; }, 4000);
+</script>
+</body>
+</html>
